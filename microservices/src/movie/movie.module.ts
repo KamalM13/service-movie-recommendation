@@ -15,5 +15,6 @@ import { JwtStrategy } from 'src/user/jwt.strategy';
   ],
   controllers: [MovieController],
   providers: [MovieService, JwtStrategy],
+  exports: [MovieService],
 })
 export class MovieModule {}

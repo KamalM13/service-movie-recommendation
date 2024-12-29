@@ -4,8 +4,9 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
-import { JwtStrategy } from './user/jwt.strategy';
 import { MovieModule } from './movie/movie.module';
+import { RecommendationModule } from './recommendation/recommendation.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -14,8 +15,9 @@ import { MovieModule } from './movie/movie.module';
     MongooseModule.forRoot(process.env.URI),
     UserModule,
     MovieModule,
+    RecommendationModule, // Import the RecommendationModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService], // Remove RecommendationService and SupabaseService
 })
 export class AppModule {}

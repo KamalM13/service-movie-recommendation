@@ -54,6 +54,10 @@ export class MovieService {
     return `Movie with ID ${id} deleted successfully`;
   }
 
+  async findMoviesByGenres(genres: string[]): Promise<Movie[]> {
+    return this.movieModel.find({ genres: { $in: genres } }).sort({ averageRating: -1 }).exec();
+  }
+
   async likeMovie(movieId, userId): Promise<string> {
     const movie = await this.movieModel.findById(movieId);
     if (!movie) {
