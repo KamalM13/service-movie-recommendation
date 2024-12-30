@@ -6,9 +6,13 @@ import { CreateReviewDto, UpdateReviewDto } from './dto/review.dto';
 export class ReviewsController {
   constructor(private readonly reviewsService: ReviewsService) {}
 
-  @Post()
-  create(@Body() createReviewDto: CreateReviewDto) {
-    return this.reviewsService.create(createReviewDto);
+  @Post('create/:movieId/:userId')
+  create(
+    @Param('movieId') movieId: string,
+    @Param('userId') userId: string,
+    @Body() createReviewDto: Omit<CreateReviewDto, 'movieId' | 'userId'>,
+  ) {
+    return this.reviewsService.create({ ...createReviewDto, movieId, userId });
   }
 
   @Get(':movieId')
@@ -21,12 +25,13 @@ export class ReviewsController {
     return this.reviewsService.update(id, updateReviewDto);
   }
 
-  @Post(':reviewId/like')
+  @Post('/like/:reviewId')
   likeReview(@Param('reviewId') reviewId: string) {
+    console.log('Review ID received in controller:', reviewId); // Log for debugging
     return this.reviewsService.likeReview(reviewId);
   }
 
-  @Post(':reviewId/dislike')
+  @Post('/dislike/:reviewId')
   dislikeReview(@Param('reviewId') reviewId: string) {
     return this.reviewsService.dislikeReview(reviewId);
   }
