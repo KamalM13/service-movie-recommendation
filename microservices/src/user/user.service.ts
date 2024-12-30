@@ -83,7 +83,7 @@ export class UserService {
   async getUserById(id: string): Promise<User> {
     const user = await this.userModel
       .findById(id)
-      .populate('watchedMovies likedMovies watchList followers following');
+      .populate('watchedMovies likedMovies watchList');
     if (!user) {
       throw new NotFoundException(`User with ID ${id} not found`);
     }
@@ -94,7 +94,7 @@ export class UserService {
   async findAll(): Promise<User[]> {
     return this.userModel
       .find()
-      .populate('watchedMovies likedMovies watchList followers following')
+      .populate('watchedMovies likedMovies watchList')
       .exec();
   }
 
@@ -102,7 +102,7 @@ export class UserService {
   async findOne(filter: { id?: string; username?: string }): Promise<User> {
     const user = await this.userModel
       .findOne(filter)
-      .populate('watchedMovies likedMovies watchList followers following');
+      .populate('watchedMovies likedMovies watchList');
     if (!user) {
       throw new NotFoundException(`User not found with the given filter`);
     }
@@ -113,7 +113,7 @@ export class UserService {
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
     const updatedUser = await this.userModel
       .findByIdAndUpdate(id, updateUserDto, { new: true })
-      .populate('watchedMovies likedMovies watchList followers following');
+      .populate('watchedMovies likedMovies watchList');
     if (!updatedUser) {
       throw new NotFoundException(`User with ID ${id} not found`);
     }

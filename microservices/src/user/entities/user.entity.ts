@@ -30,12 +30,6 @@ export class User extends Document {
   @Prop({ type: [Types.ObjectId], ref: 'Movie', default: [] })
   watchList: Types.ObjectId[]; // Movies the user plans to watch
 
-  @Prop({ type: [Types.ObjectId], ref: 'User', default: [] })
-  following: Types.ObjectId[]; // Users this user is following
-
-  @Prop({ type: [Types.ObjectId], ref: 'User', default: [] })
-  followers: Types.ObjectId[]; // Users following this user
-
   @Prop({ default: false })
   isAdmin: boolean; // Flag to determine if the user has admin privileges
 
