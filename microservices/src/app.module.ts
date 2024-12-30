@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MovieModule } from './movie/movie.module';
 import { RecommendationModule } from './recommendation/recommendation.module';
 import { SearchModule } from './search/search.module';
+import { ReviewsModule } from './reviews/reviews.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { SearchModule } from './search/search.module';
     MovieModule,
     RecommendationModule,
     SearchModule, // Import the RecommendationModule
+    ReviewsModule
   ],
   controllers: [AppController],
   providers: [AppService], // Remove RecommendationService and SupabaseService
