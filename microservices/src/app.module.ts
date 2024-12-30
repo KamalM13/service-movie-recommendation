@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { MovieModule } from './movie/movie.module';
 import { RecommendationModule } from './recommendation/recommendation.module';
+import { SearchModule } from './search/search.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { RecommendationModule } from './recommendation/recommendation.module';
     MongooseModule.forRoot(process.env.URI),
     UserModule,
     MovieModule,
-    RecommendationModule, // Import the RecommendationModule
+    RecommendationModule,
+    SearchModule, // Import the RecommendationModule
   ],
   controllers: [AppController],
   providers: [AppService], // Remove RecommendationService and SupabaseService
