@@ -55,7 +55,10 @@ export class MovieService {
   }
 
   async findMoviesByGenres(genres: string[]): Promise<Movie[]> {
-    return this.movieModel.find({ genres: { $in: genres } }).sort({ averageRating: -1 }).exec();
+    return this.movieModel
+      .find({ genres: { $in: genres } })
+      .sort({ averageRating: -1 })
+      .exec();
   }
 
   async likeMovie(movieId, userId): Promise<string> {
@@ -188,7 +191,9 @@ export class MovieService {
   }
 
   async getWatchedMovies(userId) {
-    const user = await this.userModel.findById(userId).populate('watchedMovies');
+    const user = await this.userModel
+      .findById(userId)
+      .populate('watchedMovies');
     if (!user) {
       throw new UnauthorizedException('User not authorized');
     }
@@ -215,5 +220,25 @@ export class MovieService {
     await user.save();
 
     return `Movie with ID ${movieId} removed from watched list successfully`;
+  }
+
+  async addPreference(userId, movieId): Promise<string> {
+    const user = await this.userModel.findById(userId);
+    if (!user) {
+      throw new UnauthorizedException('User not authorized');
+    }
+    const movie = await this.movieModel.findById(movieId);
+    if (!movie) {
+      throw new NotFoundException(`Movie with ID ${movieId} not found`);
+    }
+
+    movie.genres.forEach((genre) => {
+      if (!user.preferences.includes(genre)) {
+        user.preferences.push(genre);
+      }
+    });
+
+    await user.save();
+    return `Preferences updated successfully`;
   }
 }

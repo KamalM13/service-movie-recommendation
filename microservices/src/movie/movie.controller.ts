@@ -50,7 +50,7 @@ export class MovieController {
   @Get('like')
   @UseGuards(AuthGuard('jwt'))
   @HttpCode(HttpStatus.OK)
-  async checkIfLiked( @Req() req) {
+  async checkIfLiked(@Req() req) {
     const userId = req.user.userId;
     console.log(userId);
     return this.movieService.getLikedMovies(userId);
@@ -112,11 +112,19 @@ export class MovieController {
     return this.movieService.markAsWatched(id, userId);
   }
 
-  @Delete('watched/:id') 
+  @Delete('watched/:id')
   @UseGuards(AuthGuard('jwt'))
   @HttpCode(HttpStatus.OK)
   async removeFromWatched(@Param('id') id: string, @Req() req) {
     const userId = req.user.userId;
     return this.movieService.removeFromWatched(id, userId);
+  }
+
+  @Post('addPreference/:id')
+  @UseGuards(AuthGuard('jwt'))
+  @HttpCode(HttpStatus.OK)
+  async addPreference(@Req() req, @Param('id') movieId: string) {
+    const userId = req.user.userId;
+    return this.movieService.addPreference(userId, movieId);
   }
 }
