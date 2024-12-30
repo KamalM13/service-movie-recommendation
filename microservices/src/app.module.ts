@@ -8,6 +8,7 @@ import { MovieModule } from './movie/movie.module';
 import { RecommendationModule } from './recommendation/recommendation.module';
 import { SearchModule } from './search/search.module';
 import { SocialModule } from './social/social.module';
+import { SummaryModule } from './summary/summary.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { SocialModule } from './social/social.module';
     MovieModule,
     RecommendationModule,
     SearchModule,
-    SocialModule, // Import the RecommendationModule
+    SocialModule,
+    SummaryModule, // Import the RecommendationModule
   ],
   controllers: [AppController],
   providers: [AppService], // Remove RecommendationService and SupabaseService
