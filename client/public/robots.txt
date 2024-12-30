@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /Admin/
+Allow: /
+Sitemap: https://www.al-rawy.com/sitemap.xml
