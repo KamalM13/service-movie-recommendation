@@ -9,6 +9,7 @@ import { RecommendationModule } from './recommendation/recommendation.module';
 import { SearchModule } from './search/search.module';
 import { SocialModule } from './social/social.module';
 import { SummaryModule } from './summary/summary.module';
+import { ReviewsModule } from './reviews/reviews.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { SummaryModule } from './summary/summary.module';
     SearchModule,
     SocialModule,
     SummaryModule, // Import the RecommendationModule
+    ReviewsModule
   ],
   controllers: [AppController],
   providers: [AppService], // Remove RecommendationService and SupabaseService
